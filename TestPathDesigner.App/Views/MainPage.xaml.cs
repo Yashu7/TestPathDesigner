@@ -28,5 +28,6 @@ namespace TestPathDesigner.App.Views
             InitializeComponent();
             DataContext = Ioc.Default.GetRequiredService<MainPageViewModel>();
         }
+
     }
 }

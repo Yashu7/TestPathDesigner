@@ -14,13 +14,10 @@ namespace TestPathDesigner.App
     {
         public App()
         {
-            // Register services
             Ioc.Default.ConfigureServices(
                     new ServiceCollection()
                     .AddTransient<MainPageViewModel>()
                     .BuildServiceProvider());
-
-            //StartupUri = new Uri(@"Views\MainPage.xaml");
         }
     }
 
