@@ -14,8 +14,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Title,Mode=TwoWay}"/>
-        <ListView Grid.Column="0">
-            
-        </ListView>
+        <StackPanel Orientation="Vertical">
+            <TextBox Text="{Binding AppName, Mode=TwoWay}"/>
+            <TextBox Text="AutomationId"/>
+            <Button Content="Start Testing" Command="{Binding StartTesting}"/>
+        </StackPanel>
     </Grid>
 </Page>

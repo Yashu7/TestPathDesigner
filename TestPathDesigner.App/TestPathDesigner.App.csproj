@@ -19,4 +19,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestPathDesigner.Testing\TestPathDesigner.Testing.csproj" />
+  </ItemGroup>
+
 </Project>
