@@ -13,11 +13,24 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Title,Mode=TwoWay}"/>
-        <StackPanel Orientation="Vertical">
-            <TextBox Text="{Binding AppName, Mode=TwoWay}"/>
-            <TextBox Text="AutomationId"/>
-            <Button Content="Start Testing" Command="{Binding StartTesting}"/>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <TextBox Text="{Binding AppName, Mode=TwoWay}"/>
+                <TextBox Text="{Binding ElementName, Mode=TwoWay}"/>
+                <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding ElementType, Mode=TwoWay}">
+                    
+                </ComboBox>
+            </StackPanel>
+            <Button Margin="50,10,50,0" Grid.Row="1" Command="{Binding AddNewTestCommand}" Content="Add Test Path"/>
+            <Button Margin="50,0,50,10" Grid.Row="2" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
+        </Grid>
+        <ListView ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
+            
+        </ListView>
     </Grid>
 </Page>

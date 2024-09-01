@@ -3,6 +3,7 @@ using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TestPathDesigner.Testing
 {
@@ -17,12 +18,26 @@ namespace TestPathDesigner.Testing
             appiumOptions.AddAdditionalCapability("app", appId);
             driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appiumOptions);
         }
-        public void StartTesting(List<string> elements)
+        public async Task StartTesting(List<TestModel> elements, Action<string> returnFunc)
         {
-            foreach(var element in elements)
+            await Task.Run(() => {
+                foreach (var element in elements)
+                {
+                    GetElement(element.ElementType, element.ElementName).Click();
+                    returnFunc.Invoke(@$"Invoked element {element.ElementName}");
+                }
+            });
+        }
+        public WindowsElement GetElement(ElementTypeEnum type, string element)
+        {
+            switch(type)
             {
-                var e = driver.FindElementByName(element);
-                e.Click();
+                case ElementTypeEnum.FindElementByName:
+                    return driver.FindElementByName(element);
+                case ElementTypeEnum.FindElementByAccessibilityId:
+                    return driver.FindElementByAccessibilityId(element);
+                default:
+                    throw new Exception("No elements found");
             }
         }
     }
