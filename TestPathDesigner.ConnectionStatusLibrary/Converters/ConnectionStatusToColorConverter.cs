@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using TestPathDesigner.ConnectionStatusLibrary.Enums;
 
-namespace TestPathDesigner.ConnectionStatusLibrary.Converters
+namespace TestPathDesigner.ConnectionStatusLibrary
 {
     public class ConnectionStatusToColorConverter : IValueConverter
     {

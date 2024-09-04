@@ -9,12 +9,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TestPathDesigner.ConnectionStatusLibrary.Enums;
 using TestPathDesigner.Testing;
 
 namespace TestPathDesigner.App.ViewModels
 {
     internal class MainPageViewModel : BaseViewModel
     {
+        private ConnectionStatusEnum _connectionStatus;
+        public ConnectionStatusEnum ConnectionStatus
+        {
+            set
+            {
+                _connectionStatus = value;
+                OnPropertyChanged(nameof(ConnectionStatus));
+            }
+            get
+            {
+                return _connectionStatus;
+            }
+        }
         private ObservableCollection<TestModel> _createdPath = new ObservableCollection<TestModel>();
         public ObservableCollection<TestModel> CreatedPath
         {
@@ -98,6 +112,7 @@ namespace TestPathDesigner.App.ViewModels
             Logs = new ObservableCollection<string>();
             StartTestingCommand = new RelayCommand(async () => await StartTesting());
             AddNewTestCommand = new RelayCommand(AddNewTest);
+            ConnectionStatus = ConnectionStatusEnum.Disconnected;
         }
         public async Task StartTesting()
         {

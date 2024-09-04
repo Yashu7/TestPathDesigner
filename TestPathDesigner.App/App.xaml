@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TestPathDesigner.App"
+             xmlns:converters="clr-namespace:TestPathDesigner.ConnectionStatusLibrary;assembly=TestPathDesigner.ConnectionStatusLibrary"
              StartupUri="Views\MainPage.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <converters:ConnectionStatusToColorConverter x:Key="ConnectionStatusToColorConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

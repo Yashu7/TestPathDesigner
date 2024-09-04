@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestPathDesigner.ConnectionStatusLibrary\TestPathDesigner.ConnectionStatusLibrary.csproj" />
     <ProjectReference Include="..\TestPathDesigner.Testing\TestPathDesigner.Testing.csproj" />
   </ItemGroup>
 
