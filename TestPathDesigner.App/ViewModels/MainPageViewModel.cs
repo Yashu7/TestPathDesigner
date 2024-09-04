@@ -15,7 +15,19 @@ namespace TestPathDesigner.App.ViewModels
 {
     internal class MainPageViewModel : BaseViewModel
     {
-        private List<TestModel> elementsToTest = new List<TestModel>();
+        private ObservableCollection<TestModel> _createdPath = new ObservableCollection<TestModel>();
+        public ObservableCollection<TestModel> CreatedPath
+        {
+            set
+            {
+                _createdPath = value;
+                OnPropertyChanged(nameof(CreatedPath));
+            }
+            get
+            { 
+                return _createdPath;
+            }
+        }
         private ObservableCollection<string> _logs;
         public ObservableCollection<string> Logs
         {
@@ -90,11 +102,11 @@ namespace TestPathDesigner.App.ViewModels
         public async Task StartTesting()
         {
             var appiumTest = new AppiumTesting(AppName);
-            await appiumTest.StartTesting(elementsToTest, LogToList);
+            await appiumTest.StartTesting(CreatedPath, LogToList);
         } 
         public void AddNewTest()
         {
-            elementsToTest.Add(new TestModel(ElementName,ElementType));
+            CreatedPath.Add(new TestModel(ElementName,ElementType, ActionEnum.Click));
             ElementName = "";
         }
         public void LogToList(string element)

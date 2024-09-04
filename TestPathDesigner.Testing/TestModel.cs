@@ -8,10 +8,12 @@ namespace TestPathDesigner.Testing
     {
         public string ElementName { get; private set; }
         public ElementTypeEnum ElementType { get; private set; }
-        public TestModel(string elementName, ElementTypeEnum elementType)
+        public ActionEnum Action { get; set; }
+        public TestModel(string elementName, ElementTypeEnum elementType, ActionEnum action)
         {
             ElementName = elementName;
             ElementType = elementType;
+            Action = action;
         }
     }
 }

@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,15 +19,27 @@ namespace TestPathDesigner.Testing
             appiumOptions.AddAdditionalCapability("app", appId);
             driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appiumOptions);
         }
-        public async Task StartTesting(List<TestModel> elements, Action<string> returnFunc)
+        public async Task StartTesting(ObservableCollection<TestModel> elements, Action<string> returnFunc)
         {
             await Task.Run(() => {
                 foreach (var element in elements)
                 {
-                    GetElement(element.ElementType, element.ElementName).Click();
-                    returnFunc.Invoke(@$"Invoked element {element.ElementName}");
+                    var foundElement = GetElement(element.ElementType, element.ElementName);
+                    GetAction(foundElement, element.Action);
+                    returnFunc.Invoke(@$"Invoked {element.Action} on element ""{element.ElementName}"" using {element.ElementType}");
                 }
             });
+        }
+        public void GetAction(WindowsElement element, ActionEnum action)
+        {
+            switch(action)
+            {
+                case ActionEnum.Click:
+                    element.Click(); 
+                    break;
+                default:
+                    break;
+            }
         }
         public WindowsElement GetElement(ElementTypeEnum type, string element)
         {
