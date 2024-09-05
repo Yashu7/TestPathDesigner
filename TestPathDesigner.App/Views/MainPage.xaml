@@ -48,7 +48,7 @@
                                     <TextBlock x:Name="EName" Text="{Binding ElementName}" Grid.Column="0"/>
                                     <TextBlock Text="{Binding ElementType}" Grid.Column="1"/>
                                     <TextBlock Text="{Binding Action}"      Grid.Column="2"/>
-                                    <Button Style="{DynamicResource NewGameButtonStyle}" x:Name="DeleteButton" Grid.Column="3" Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.DeleteCommand}" CommandParameter="{Binding }"/>
+                                    <Button Style="{DynamicResource DeleteButton}" x:Name="DeleteButton" Grid.Column="3" Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.DeleteCommand}" CommandParameter="{Binding }"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
