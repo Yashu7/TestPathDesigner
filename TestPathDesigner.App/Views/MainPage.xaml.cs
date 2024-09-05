@@ -29,5 +29,9 @@ namespace TestPathDesigner.App.Views
             DataContext = Ioc.Default.GetRequiredService<MainPageViewModel>();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

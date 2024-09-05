@@ -5,12 +5,13 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TestPathDesigner.App.Commands;
 using TestPathDesigner.ConnectionStatusLibrary.Enums;
 using TestPathDesigner.Testing;
 
 namespace TestPathDesigner.App.ViewModels
 {
-    internal class MainPageViewModel : BaseViewModel
+    internal class MainPageViewModel : BaseViewModel, ICRUDCommands
     {
         private DispatcherTimer _connectionStatusTimer;
         private ConnectionStatusEnum _connectionStatus;
@@ -104,7 +105,11 @@ namespace TestPathDesigner.App.ViewModels
             }
         }
         public ICommand StartTestingCommand { get; set; }
-        public ICommand AddNewTestCommand { get; set; }
+        public ICommand AddCommand { get; set;}
+        public ICommand ReadCommand { get; set;}
+        public ICommand UpdateCommand {get; set;}
+        public ICommand DeleteCommand { get; set; }
+
         public MainPageViewModel()
         {
             InitializeProperties();
@@ -127,7 +132,8 @@ namespace TestPathDesigner.App.ViewModels
         public void InitializeCommands()
         {
             StartTestingCommand = new RelayCommand(async () => await StartTesting());
-            AddNewTestCommand = new RelayCommand(AddNewTest);
+            AddCommand = new RelayCommand(AddTest);
+            DeleteCommand = new RelayCommand<object>(DeleteTest);
         }
         private async Task StartTesting()
         {
@@ -135,7 +141,11 @@ namespace TestPathDesigner.App.ViewModels
             await appiumTest.StartTesting(CreatedPath, LogToList);
 
         }
-        private void AddNewTest()
+        private void DeleteTest(object item)
+        {
+            CreatedPath.Remove(item as TestModel);
+        }
+        private void AddTest()
         {
             CreatedPath.Add(new TestModel(ElementName,ElementType, ActionEnum.Click));
             ElementName = "";
