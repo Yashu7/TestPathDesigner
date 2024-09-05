@@ -154,11 +154,17 @@ namespace TestPathDesigner.App.ViewModels
             DeleteCommand = new RelayCommand<object>(DeleteTest);
             SetAppCommand = new RelayCommand(SetApp);
             ExportPathCommand = new RelayCommand(ExportPath);
+            ImportPathCommand = new RelayCommand(ImportPath);
         }
         private void ExportPath()
         {
             var serializer = new SerializationService<ObservableCollection<TestModel>>();
             serializer.SerializeObject(CreatedPath);
+        }
+        private void ImportPath()
+        {
+            var serializer = new SerializationService<ObservableCollection<TestModel>>();
+            var output = serializer.DeserializeObject();
         }
         private void SetApp()
         {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
+using System.Windows.Shapes;
 
 namespace Services.Services
 {
@@ -42,12 +43,8 @@ namespace Services.Services
             // Process open file dialog box results
             if (result == true)
             {
-                // Open document
-                string folderName = dialog.SafeFileName;
-                using (var stream = new FileStream(dialog.FileName, FileMode.Create))
-                {
-                    return JsonSerializer.Deserialize<T>(stream);
-                }
+                string readText = File.ReadAllText(dialog.FileName);
+                return JsonSerializer.Deserialize<T>(readText);
             }
             return default;
         }
