@@ -1,14 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TestPathDesigner.ConnectionStatusLibrary.Enums;
 using TestPathDesigner.Testing;
 
@@ -16,6 +10,7 @@ namespace TestPathDesigner.App.ViewModels
 {
     internal class MainPageViewModel : BaseViewModel
     {
+        private DispatcherTimer _connectionStatusTimer;
         private ConnectionStatusEnum _connectionStatus;
         public ConnectionStatusEnum ConnectionStatus
         {
@@ -109,28 +104,54 @@ namespace TestPathDesigner.App.ViewModels
         public ICommand AddNewTestCommand { get; set; }
         public MainPageViewModel()
         {
+            InitializeProperties();
+            InitializeCommands();
+            InitializeTimers();
+        }
+        private void InitializeProperties()
+        {
             Logs = new ObservableCollection<string>();
+            ConnectionStatus = ConnectionStatusEnum.Disconnected;
+
+            
+        }
+        private void InitializeTimers()
+        {
+            _connectionStatusTimer = new System.Windows.Threading.DispatcherTimer();
+            _connectionStatusTimer.Tick += new EventHandler(CheckConnectionStatus);
+            _connectionStatusTimer.Interval = TimeSpan.FromSeconds(1);
+            _connectionStatusTimer.Start();
+        }
+        public void InitializeCommands()
+        {
             StartTestingCommand = new RelayCommand(async () => await StartTesting());
             AddNewTestCommand = new RelayCommand(AddNewTest);
-            ConnectionStatus = ConnectionStatusEnum.Disconnected;
         }
-        public async Task StartTesting()
+        private async Task StartTesting()
         {
             var appiumTest = new AppiumTesting(AppName);
             await appiumTest.StartTesting(CreatedPath, LogToList);
-        } 
-        public void AddNewTest()
+
+        }
+        private void AddNewTest()
         {
             CreatedPath.Add(new TestModel(ElementName,ElementType, ActionEnum.Click));
             ElementName = "";
         }
-        public void LogToList(string element)
+        private void LogToList(string element)
         {
             Add(element);
         }
-        public void Add(string element)
+        private void Add(string element)
         {
             Application.Current.Dispatcher.Invoke(() => Logs.Add(element));
+        }
+        private void CheckConnectionStatus(object sender, EventArgs e)
+        {
+            var rand = new Random();
+            ConnectionStatusEnum status = (ConnectionStatusEnum)rand.Next(0, 4);
+            ConnectionStatus = status;
+            //CommandManager.InvalidateRequerySuggested();
         }
 
     }
