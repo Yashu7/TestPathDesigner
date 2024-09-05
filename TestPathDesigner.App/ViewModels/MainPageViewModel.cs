@@ -121,7 +121,7 @@ namespace TestPathDesigner.App.ViewModels
         {
             _connectionStatusTimer = new System.Windows.Threading.DispatcherTimer();
             _connectionStatusTimer.Tick += new EventHandler(CheckConnectionStatus);
-            _connectionStatusTimer.Interval = TimeSpan.FromSeconds(1);
+            _connectionStatusTimer.Interval = TimeSpan.FromSeconds(10);
             _connectionStatusTimer.Start();
         }
         public void InitializeCommands()
@@ -151,7 +151,8 @@ namespace TestPathDesigner.App.ViewModels
         private void CheckConnectionStatus(object sender, EventArgs e)
         {
             var rand = new Random();
-            ConnectionStatusEnum status = (ConnectionStatusEnum)rand.Next(0, 4);
+            var isConnected = _connectionStatusService.IsConnected("", $@"http://127.0.0.1:4723");
+            ConnectionStatusEnum status = isConnected ? ConnectionStatusEnum.Connected : ConnectionStatusEnum.Disconnected;
             ConnectionStatus = status;
             //CommandManager.InvalidateRequerySuggested();
         }

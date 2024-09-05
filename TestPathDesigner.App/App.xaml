@@ -7,6 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <converters:ConnectionStatusToColorConverter x:Key="ConnectionStatusToColorConverter"/>
+            <converters:ConnectionStatusToTextConverter x:Key="ConnectionStatusToTextConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

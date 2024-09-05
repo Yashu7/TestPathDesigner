@@ -65,6 +65,7 @@
         </Grid>
         <StackPanel Orientation="Vertical" Grid.Row="1" Background="Cornsilk">
             <Border BorderBrush="{Binding ConnectionStatus,Converter={StaticResource ConnectionStatusToColorConverter}}" BorderThickness="8" Width="16" HorizontalAlignment="Left" Margin="10,2,0,0" CornerRadius="10"/>
+            <TextBlock Text="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToTextConverter}}"/>
         </StackPanel>
     </Grid>
 </Page>
