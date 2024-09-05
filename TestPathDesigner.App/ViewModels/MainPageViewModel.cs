@@ -112,8 +112,6 @@ namespace TestPathDesigner.App.ViewModels
         {
             Logs = new ObservableCollection<string>();
             ConnectionStatus = ConnectionStatusEnum.Disconnected;
-
-            
         }
         private void InitializeTimers()
         {
