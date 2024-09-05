@@ -8,6 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -32,7 +35,7 @@
                 </StackPanel>
                 <Button Margin="50,10,50,0" Grid.Row="1" Command="{Binding AddCommand}" Content="Add Test Path"/>
                 <StackPanel Grid.Row="2" Orientation="Vertical">
-                    <ListView MaxHeight="200" ItemsSource="{Binding CreatedPath, Mode=TwoWay}" Margin="20">
+                    <ListView Height="200" ItemsSource="{Binding CreatedPath, Mode=TwoWay}" Margin="20">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch" Width="Auto">
@@ -40,11 +43,12 @@
                                         <ColumnDefinition Width="Auto" MinWidth="50"/>
                                         <ColumnDefinition Width="Auto" MinWidth="200"/>
                                         <ColumnDefinition Width="*" MinWidth="50"/>
+                                        <ColumnDefinition Width="*" MinWidth="50"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock x:Name="EName" Text="{Binding ElementName}" Grid.Column="0"/>
                                     <TextBlock Text="{Binding ElementType}" Grid.Column="1"/>
                                     <TextBlock Text="{Binding Action}"      Grid.Column="2"/>
-                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.DeleteCommand}" CommandParameter="{Binding }"/>
+                                    <Button Style="{DynamicResource NewGameButtonStyle}" x:Name="DeleteButton" Grid.Column="3" Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.DeleteCommand}" CommandParameter="{Binding }"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

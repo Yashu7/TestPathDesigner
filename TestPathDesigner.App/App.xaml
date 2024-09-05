@@ -8,6 +8,9 @@
         <ResourceDictionary>
             <converters:ConnectionStatusToColorConverter x:Key="ConnectionStatusToColorConverter"/>
             <converters:ConnectionStatusToTextConverter x:Key="ConnectionStatusToTextConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StyleLibrary;component/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
