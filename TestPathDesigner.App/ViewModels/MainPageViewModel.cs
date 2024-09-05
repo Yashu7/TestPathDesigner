@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using Services;
+using Services.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -123,6 +124,8 @@ namespace TestPathDesigner.App.ViewModels
         public ICommand UpdateCommand {get; set;}
         public ICommand DeleteCommand { get; set; }
         public ICommand SetAppCommand { get; set; }
+        public ICommand ExportPathCommand { get; set; }
+        public ICommand ImportPathCommand { get; set; }
 
         public MainPageViewModel()
         {
@@ -150,6 +153,12 @@ namespace TestPathDesigner.App.ViewModels
             AddCommand = new RelayCommand(AddTest);
             DeleteCommand = new RelayCommand<object>(DeleteTest);
             SetAppCommand = new RelayCommand(SetApp);
+            ExportPathCommand = new RelayCommand(ExportPath);
+        }
+        private void ExportPath()
+        {
+            var serializer = new SerializationService<ObservableCollection<TestModel>>();
+            serializer.SerializeObject(CreatedPath);
         }
         private void SetApp()
         {

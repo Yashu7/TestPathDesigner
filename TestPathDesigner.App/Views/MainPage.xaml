@@ -67,8 +67,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Margin="20" Command="{Binding ExportPath}" Content="Export"/>
-                        <Button Grid.Column="1" Margin="20" Command="{Binding Import}" Content="Import"/>
+                        <Button Grid.Column="0" Margin="20" Command="{Binding ExportPathCommand}" Content="Export"/>
+                        <Button Grid.Column="1" Margin="20" Command="{Binding ImportPathCommand}" Content="Import"/>
                     </Grid>
                 </StackPanel>
                 <Button IsEnabled="{Binding IsAppSet}" Margin="50,0,50,10" Grid.Row="3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
