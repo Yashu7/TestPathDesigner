@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConverterLibrary\ConverterLibrary.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\StyleLibrary\StyleLibrary.csproj" />
     <ProjectReference Include="..\TestPathDesigner.ConnectionStatusLibrary\TestPathDesigner.ConnectionStatusLibrary.csproj" />

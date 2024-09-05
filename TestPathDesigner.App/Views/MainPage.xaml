@@ -28,13 +28,22 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Vertical">
-                    <TextBox Text="{Binding AppName, Mode=TwoWay}"/>
+                <StackPanel Grid.Row="0" IsEnabled="{Binding IsAppSet, Converter={StaticResource ReverseBoolConverter}}" Orientation="Vertical">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Text="{Binding AppName, Mode=TwoWay}"/>
+                        <Button Width="100" Grid.Column="1" Content="Set" Command="{Binding SetAppCommand}"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel IsEnabled="{Binding IsAppSet}" Orientation="Vertical" Grid.Row="1">
                     <TextBox Text="{Binding ElementName, Mode=TwoWay}"/>
                     <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding ElementType, Mode=TwoWay}"/>
+                    <Button Margin="50,10,50,0" Command="{Binding AddCommand}" Content="Add Test Path"/>
                 </StackPanel>
-                <Button Margin="50,10,50,0" Grid.Row="1" Command="{Binding AddCommand}" Content="Add Test Path"/>
-                <StackPanel Grid.Row="2" Orientation="Vertical">
+                <StackPanel IsEnabled="{Binding IsAppSet}" Grid.Row="2" Orientation="Vertical">
                     <ListView Height="200" ItemsSource="{Binding CreatedPath, Mode=TwoWay}" Margin="20">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -43,7 +52,7 @@
                                         <ColumnDefinition Width="Auto" MinWidth="50"/>
                                         <ColumnDefinition Width="Auto" MinWidth="200"/>
                                         <ColumnDefinition Width="*" MinWidth="50"/>
-                                        <ColumnDefinition Width="*" MinWidth="50"/>
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock x:Name="EName" Text="{Binding ElementName}" Grid.Column="0"/>
                                     <TextBlock Text="{Binding ElementType}" Grid.Column="1"/>
@@ -62,7 +71,7 @@
                         <Button Grid.Column="1" Margin="20" Command="{Binding Import}" Content="Import"/>
                     </Grid>
                 </StackPanel>
-                <Button Margin="50,0,50,10" Grid.Row="3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
+                <Button IsEnabled="{Binding IsAppSet}" Margin="50,0,50,10" Grid.Row="3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
             </Grid>
             <ListView ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
 

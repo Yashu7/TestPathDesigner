@@ -16,6 +16,19 @@ namespace TestPathDesigner.App.ViewModels
         private DispatcherTimer _connectionStatusTimer;
         private ConnectionStatusEnum _connectionStatus;
         private IConnectionService _connectionStatusService;
+        private bool _isAppSet;
+        public bool IsAppSet
+        {
+            set
+            {
+                _isAppSet = value;
+                OnPropertyChanged(nameof(IsAppSet));
+            }
+            get
+            {
+                return _isAppSet;
+            }
+        }
         public ConnectionStatusEnum ConnectionStatus
         {
             set
@@ -109,6 +122,7 @@ namespace TestPathDesigner.App.ViewModels
         public ICommand ReadCommand { get; set;}
         public ICommand UpdateCommand {get; set;}
         public ICommand DeleteCommand { get; set; }
+        public ICommand SetAppCommand { get; set; }
 
         public MainPageViewModel()
         {
@@ -119,6 +133,7 @@ namespace TestPathDesigner.App.ViewModels
         }
         private void InitializeProperties()
         {
+            IsAppSet = false;
             Logs = new ObservableCollection<string>();
             ConnectionStatus = ConnectionStatusEnum.Disconnected;
         }
@@ -134,6 +149,11 @@ namespace TestPathDesigner.App.ViewModels
             StartTestingCommand = new RelayCommand(async () => await StartTesting());
             AddCommand = new RelayCommand(AddTest);
             DeleteCommand = new RelayCommand<object>(DeleteTest);
+            SetAppCommand = new RelayCommand(SetApp);
+        }
+        private void SetApp()
+        {
+            IsAppSet = true;
         }
         private async Task StartTesting()
         {

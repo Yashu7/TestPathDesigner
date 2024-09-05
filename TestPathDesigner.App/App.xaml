@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TestPathDesigner.App"
              xmlns:converters="clr-namespace:TestPathDesigner.ConnectionStatusLibrary;assembly=TestPathDesigner.ConnectionStatusLibrary"
+             xmlns:convertersLibrary="clr-namespace:ConverterLibrary;assembly=ConverterLibrary"
              StartupUri="Views\MainPage.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <converters:ConnectionStatusToColorConverter x:Key="ConnectionStatusToColorConverter"/>
             <converters:ConnectionStatusToTextConverter x:Key="ConnectionStatusToTextConverter"/>
+            <convertersLibrary:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/StyleLibrary;component/ButtonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
