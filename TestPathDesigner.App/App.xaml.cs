@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Services;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace TestPathDesigner.App
             Ioc.Default.ConfigureServices(
                     new ServiceCollection()
                     .AddTransient<MainPageViewModel>()
+                    .AddTransient<IConnectionService, ConnectionService>()
                     .BuildServiceProvider());
         }
     }

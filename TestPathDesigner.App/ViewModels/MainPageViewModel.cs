@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Input;
+using Services;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +14,7 @@ namespace TestPathDesigner.App.ViewModels
     {
         private DispatcherTimer _connectionStatusTimer;
         private ConnectionStatusEnum _connectionStatus;
+        private IConnectionService _connectionStatusService;
         public ConnectionStatusEnum ConnectionStatus
         {
             set
@@ -107,6 +110,7 @@ namespace TestPathDesigner.App.ViewModels
             InitializeProperties();
             InitializeCommands();
             InitializeTimers();
+            _connectionStatusService = Ioc.Default.GetService<IConnectionService>();
         }
         private void InitializeProperties()
         {

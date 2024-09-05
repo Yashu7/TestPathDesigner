@@ -1,17 +1,23 @@
-﻿using Services.Services.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Http;
 
-namespace Services.Services
+namespace Services
 {
     public class ConnectionService : IConnectionService
     {
         public bool IsConnected(string serviceName, string serviceAddress)
         {
-            throw new NotImplementedException();
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(serviceAddress);
+            try
+            {
+                httpClient.Send(new HttpRequestMessage(HttpMethod.Head, ""));
+            }
+            catch(HttpRequestException ex)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
