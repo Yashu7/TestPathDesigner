@@ -43,6 +43,7 @@ namespace Services.Services
             // Process open file dialog box results
             if (result == true)
             {
+                var text = System.IO.File.ReadLines(dialog.FileName);
                 string readText = File.ReadAllText(dialog.FileName);
                 return JsonSerializer.Deserialize<T>(readText);
             }
