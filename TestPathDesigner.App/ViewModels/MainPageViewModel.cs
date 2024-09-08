@@ -192,7 +192,8 @@ namespace TestPathDesigner.App.ViewModels
         {
             var serializer = new SerializationService<ObservableCollection<TestModel>>();
             var output = serializer.DeserializeObject();
-            CreatedPath = new ObservableCollection<TestModel>(output);
+            if(output != null) 
+               CreatedPath = new ObservableCollection<TestModel>(output);
         }
         private void SetApp()
         {
