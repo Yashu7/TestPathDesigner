@@ -9,5 +9,6 @@ namespace Services
     public interface IConnectionService
     {
         public bool IsConnected(string serviceName, string serviceAddress);
+        public bool IsConnected(string serviceAddress);
     }
 }

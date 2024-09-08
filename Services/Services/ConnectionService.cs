@@ -19,5 +19,20 @@ namespace Services
             }
             return true;
         }
+
+        public bool IsConnected(string serviceAddress)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(serviceAddress);
+            try
+            {
+                httpClient.Send(new HttpRequestMessage(HttpMethod.Head, ""));
+            }
+            catch (HttpRequestException ex)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

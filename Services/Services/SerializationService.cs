@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace Services.Services
 {
-    public class SerializationService<T>
+    public class SerializationService<T> where T : new()
     {
         public void SerializeObject(T obj)
         {
@@ -32,7 +32,7 @@ namespace Services.Services
                 }
             }
         }
-        public T DeserializeObject()
+        public T DeserializeObject() 
         {
             // Configure open file dialog box
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -47,7 +47,7 @@ namespace Services.Services
                 string readText = File.ReadAllText(dialog.FileName);
                 return JsonSerializer.Deserialize<T>(readText);
             }
-            return default;
+            return new T();
         }
     }
 }

@@ -16,6 +16,18 @@ namespace Services.Test
             Setup();
             Assert.IsTrue(service.IsConnected("", $@"http://127.0.0.1:80"));
         }
+        [TestMethod]
+        public void ConnectionOnlyAddressRequestWillReturnFalse()
+        {
+            Setup();
+            Assert.IsFalse(service.IsConnected($@"http://127.0.0.1:9999"));
+        }
+        [TestMethod]
+        public void ConnectionOnlyAddressRequesWillReturnTrue()
+        {
+            Setup();
+            Assert.IsTrue(service.IsConnected($@"http://127.0.0.1:80"));
+        }
         private void Setup()
         {
             service = new ConnectionService();
