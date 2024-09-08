@@ -49,5 +49,13 @@ namespace Services.Services
             }
             return new T();
         }
+        public T DeserializeObject(string valueToDeserialize) 
+        {
+            if (String.IsNullOrEmpty(valueToDeserialize))
+            {
+                return JsonSerializer.Deserialize<T>(valueToDeserialize);
+            }
+            return new T();
+        }
     }
 }

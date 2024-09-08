@@ -22,7 +22,15 @@ namespace TestPathDesigner.Testing
             appId = appName;
             var appiumOptions = new AppiumOptions();
             appiumOptions.AddAdditionalCapability("app", appId);
-            driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appiumOptions);
+            try
+            {
+                driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appiumOptions);
+            }
+            catch(OpenQA.Selenium.WebDriverException ex)
+            { 
+
+            }
+
         }
         public async Task StartTesting(ObservableCollection<TestModel> elements, Action<string> returnFunc)
         {

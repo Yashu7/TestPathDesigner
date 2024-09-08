@@ -34,8 +34,21 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Text="{Binding AppName, Mode=TwoWay}"/>
-                        <Button Width="100" Grid.Column="1" Content="Set" Command="{Binding SetAppCommand}"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ComboBox Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding AppModels, Mode=TwoWay}" SelectedItem="{Binding AppModelSelected, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding AppName, Mode=TwoWay}"/>
+                        <Button Grid.Row="1" Width="100" Grid.Column="1" Content="Set" Command="{Binding SetAppCommand}"/>
                     </Grid>
                 </StackPanel>
                 <StackPanel IsEnabled="{Binding IsAppSet}" Orientation="Vertical" Grid.Row="1">

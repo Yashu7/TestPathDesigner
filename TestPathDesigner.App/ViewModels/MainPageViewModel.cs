@@ -3,12 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using Services;
 using Services.Services;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TestPathDesigner.App.Commands;
 using TestPathDesigner.ConnectionStatusLibrary.Enums;
 using TestPathDesigner.Testing;
+using TestPathDesigner.Testing.Models;
 
 namespace TestPathDesigner.App.ViewModels
 {
@@ -55,6 +57,32 @@ namespace TestPathDesigner.App.ViewModels
                 return _createdPath;
             }
         }
+        private AppModel _appModelSelected;
+        public AppModel AppModelSelected
+        {
+            set
+            {
+                _appModelSelected = value;
+                OnPropertyChanged(nameof(AppModelSelected));
+            }
+            get 
+            { 
+                return _appModelSelected;
+            }
+        }
+        private ObservableCollection<AppModel> _appModels = new ObservableCollection<AppModel>();
+        public ObservableCollection<AppModel> AppModels
+        {
+            set
+            {
+                _appModels = value;
+                OnPropertyChanged(nameof(AppModels));
+            }
+            get
+            { 
+                return _appModels;
+            }
+        }
         private ObservableCollection<string> _logs;
         public ObservableCollection<string> Logs
         {
@@ -73,12 +101,13 @@ namespace TestPathDesigner.App.ViewModels
         {
             set
             {
-                _appName = value;
+                AppModelSelected = new AppModel();
+                AppModelSelected.PackageFamilyName = value;
                 OnPropertyChanged(nameof(AppName));
             }
             get
             {
-                return _appName;
+                return AppModelSelected?.PackageFamilyName + "!app";
             }
         }
         private string _elementName;
@@ -160,7 +189,30 @@ namespace TestPathDesigner.App.ViewModels
             InitializeCommands();
             InitializeTimers();
             _connectionStatusService = Ioc.Default.GetService<IConnectionService>();
-        }
+            // PowerShell Process Start
+            Process process = new Process();
+            process.StartInfo.FileName = "powershell.exe";
+            process.StartInfo.Arguments = $"-command \"(Get-AppxPackage | Where-Object {{ $_.IsFramework -eq $false }} | Select-Object Name, PackageFamilyName)\"";
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+
+            // Read Result
+            string output = process.StandardOutput.ReadToEnd();
+
+            AppModels = new ObservableCollection<AppModel>();
+            var serializer = new SerializationService<List<AppModel>>();
+            string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                var supaLine = System.Text.RegularExpressions.Regex.Split(line.Trim(), @"\s{2,}");
+                AppModels.Add(new AppModel(supaLine.First(), supaLine.Last()));
+            }
+
+            // Process End
+            process.WaitForExit();
+         }
         private void InitializeProperties()
         {
             IsAppSet = false;

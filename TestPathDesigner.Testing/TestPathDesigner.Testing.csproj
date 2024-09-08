@@ -9,4 +9,10 @@
     <PackageReference Include="Appium.WebDriver" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Models\AppModel.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>
