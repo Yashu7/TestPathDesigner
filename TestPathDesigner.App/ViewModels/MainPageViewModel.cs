@@ -120,6 +120,31 @@ namespace TestPathDesigner.App.ViewModels
                 };
             }
         }
+        private ActionEnum _actionType;
+        public ActionEnum ActionType
+        {
+            set
+            {
+                _actionType = value;
+                OnPropertyChanged(nameof(ActionType));
+            }
+            get
+            {
+                return _actionType;
+            }
+        }
+        public List<ActionEnum> Actions
+        {
+            get
+            {
+                return new List<ActionEnum>
+                {
+                    ActionEnum.Click,
+                    ActionEnum.Wait,
+                    ActionEnum.Printscreen
+                };
+            }
+        }
         public ICommand StartTestingCommand { get; set; }
         public ICommand AddCommand { get; set;}
         public ICommand ReadCommand { get; set;}
@@ -185,7 +210,7 @@ namespace TestPathDesigner.App.ViewModels
         }
         private void AddTest()
         {
-            CreatedPath.Add(new TestModel(ElementName,ElementType, ActionEnum.Click));
+            CreatedPath.Add(new TestModel(ElementName,ElementType, ActionType));
             ElementName = "";
         }
         private void LogToList(string element)

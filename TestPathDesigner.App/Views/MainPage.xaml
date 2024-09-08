@@ -41,6 +41,7 @@
                 <StackPanel IsEnabled="{Binding IsAppSet}" Orientation="Vertical" Grid.Row="1">
                     <TextBox Text="{Binding ElementName, Mode=TwoWay}"/>
                     <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding ElementType, Mode=TwoWay}"/>
+                    <ComboBox ItemsSource="{Binding Actions}" SelectedItem="{Binding ActionType, Mode=TwoWay}"/>
                     <Button Margin="50,10,50,0" Command="{Binding AddCommand}" Content="Add Test Path"/>
                 </StackPanel>
                 <StackPanel IsEnabled="{Binding IsAppSet}" Grid.Row="2" Orientation="Vertical">

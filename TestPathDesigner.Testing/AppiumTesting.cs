@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,14 +34,14 @@ namespace TestPathDesigner.Testing
                 }
             });
         }
-        public void ResolveTest(TestModel element, Action<string> returnFunc)
+        private void ResolveTest(TestModel element, Action<string> returnFunc)
         {
             Thread.Sleep(500);
             var foundElement = GetElement(element.ElementType, element.ElementName);
             GetAction(foundElement, element.Action);
             returnFunc.Invoke(@$"Invoked {element.Action} on element ""{element.ElementName}"" using {element.ElementType}");
         }
-        public void GetAction(WindowsElement element, ActionEnum action)
+        private void GetAction(WindowsElement element, ActionEnum action)
         {
             switch(action)
             {
@@ -51,24 +52,28 @@ namespace TestPathDesigner.Testing
                     Thread.Sleep(500);
                     break;
                 case ActionEnum.Printscreen:
-                    driver.TakeScreenshot();
+                    TakeScreenshot();
                     break;
                 default:
                     break;
             }
         }
-        public WindowsElement GetElement(ElementTypeEnum type, string element)
+        private void TakeScreenshot()
         {
+            var image = driver.TakeScreenshot();
+            string filePath = $"{DateTime.Now.ToString("dd MM yy HH mm ss")}.jpg";
+            File.WriteAllBytes(filePath, Convert.FromBase64String(image.AsBase64EncodedString));
+        }
+        private WindowsElement GetElement(ElementTypeEnum type, string element)
+        {
+            if (String.IsNullOrEmpty(element))
+                return null;
             switch(type)
             {
                 case ElementTypeEnum.FindElementByName:
                     return driver.FindElementByName(element);
                 case ElementTypeEnum.FindElementByAccessibilityId:
                     return driver.FindElementByAccessibilityId(element);
-                case ElementTypeEnum.Wait:
-                    return null;
-                case ElementTypeEnum.Printscreen:
-                    return null;
                 default:
                     throw new Exception("No elements found");
             }
