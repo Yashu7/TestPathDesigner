@@ -12,6 +12,7 @@
             <convertersLibrary:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/StyleLibrary;component/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/StyleLibrary;component/ComboboxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

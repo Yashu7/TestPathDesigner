@@ -7,16 +7,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
-
-    <Page.Resources>
-        
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition MaxHeight="20"/>
         </Grid.RowDefinitions>
-        <Grid Background="MistyRose" Grid.Row="0">
+        <Grid Background="#101720" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -38,7 +34,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <ComboBox Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding AppModels, Mode=TwoWay}" SelectedItem="{Binding AppModelSelected, Mode=TwoWay}">
+                        <ComboBox Margin="0,0,0,10" Style="{DynamicResource ComboBoxStyle1}" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding AppModels, Mode=TwoWay}" SelectedItem="{Binding AppModelSelected, Mode=TwoWay}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -47,7 +43,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding AppName, Mode=TwoWay}"/>
+                        <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding AppName, Mode=TwoWay}"/>
                         <Button Grid.Row="1" Width="100" Grid.Column="1" Content="Set" Command="{Binding SetAppCommand}"/>
                     </Grid>
                 </StackPanel>
@@ -87,7 +83,7 @@
                 </StackPanel>
                 <Button IsEnabled="{Binding IsAppSet}" Margin="50,0,50,10" Grid.Row="3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
             </Grid>
-            <ListView ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
+            <ListView Background="#101720" Foreground="White" ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
 
             </ListView>
         </Grid>
