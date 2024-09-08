@@ -6,6 +6,8 @@ namespace TestPathDesigner.Testing
 {
     public enum ActionEnum
     {
-        Click
+        Click,
+        Wait,
+        Printscreen
     }
 }

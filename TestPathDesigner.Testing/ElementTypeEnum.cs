@@ -10,5 +10,7 @@ namespace TestPathDesigner.Testing
         FindElementsByName,
         FindElementByAccessibilityId,
         FindElementsByAccessibilityId,
+        Wait,
+        Printscreen
     }
 }

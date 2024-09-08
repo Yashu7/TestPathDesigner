@@ -114,7 +114,9 @@ namespace TestPathDesigner.App.ViewModels
                 return new List<ElementTypeEnum>
                 {
                     ElementTypeEnum.FindElementByName,
-                    ElementTypeEnum.FindElementByAccessibilityId
+                    ElementTypeEnum.FindElementByAccessibilityId,
+                    ElementTypeEnum.Printscreen,
+                    ElementTypeEnum.Wait
                 };
             }
         }
