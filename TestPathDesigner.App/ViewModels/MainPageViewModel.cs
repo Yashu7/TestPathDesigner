@@ -107,7 +107,7 @@ namespace TestPathDesigner.App.ViewModels
             }
             get
             {
-                return AppModelSelected?.PackageFamilyName + "!app";
+                return AppModelSelected?.PackageFamilyName;
             }
         }
         private string _elementName;
