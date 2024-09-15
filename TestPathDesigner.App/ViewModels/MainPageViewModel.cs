@@ -8,17 +8,19 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TestPathDesigner.App.Commands;
+using TestPathDesigner.App.Services.Interfaces;
 using TestPathDesigner.ConnectionStatusLibrary.Enums;
 using TestPathDesigner.Testing;
 using TestPathDesigner.Testing.Models;
 
 namespace TestPathDesigner.App.ViewModels
 {
-    internal class MainPageViewModel : BaseViewModel, ICRUDCommands
+    internal class MainPageViewModel : BaseViewModel, ICRUDCommands, NavigateAppCommands
     {
         private DispatcherTimer _connectionStatusTimer;
         private ConnectionStatusEnum _connectionStatus;
         private IConnectionService _connectionStatusService;
+        private IAppService _appService;
         private bool _isAppSet;
         public bool IsAppSet
         {
@@ -182,6 +184,7 @@ namespace TestPathDesigner.App.ViewModels
         public ICommand SetAppCommand { get; set; }
         public ICommand ExportPathCommand { get; set; }
         public ICommand ImportPathCommand { get; set; }
+        public ICommand ExitAppCommand { get; set; }
 
         public MainPageViewModel()
         {
@@ -189,6 +192,7 @@ namespace TestPathDesigner.App.ViewModels
             InitializeCommands();
             InitializeTimers();
             _connectionStatusService = Ioc.Default.GetService<IConnectionService>();
+            _appService = Ioc.Default.GetService<IAppService>();
             // PowerShell Process Start
             Process process = new Process();
             process.StartInfo.FileName = "powershell.exe";
@@ -234,6 +238,7 @@ namespace TestPathDesigner.App.ViewModels
             SetAppCommand = new RelayCommand(SetApp);
             ExportPathCommand = new RelayCommand(ExportPath);
             ImportPathCommand = new RelayCommand(ImportPath);
+            ExitAppCommand = new RelayCommand(() => { _appService.ExitApp(); });
         }
         private void ExportPath()
         {

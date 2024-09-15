@@ -4,6 +4,8 @@ using Services;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using TestPathDesigner.App.Services;
+using TestPathDesigner.App.Services.Interfaces;
 using TestPathDesigner.App.ViewModels;
 
 namespace TestPathDesigner.App
@@ -19,6 +21,7 @@ namespace TestPathDesigner.App
                     new ServiceCollection()
                     .AddTransient<MainPageViewModel>()
                     .AddTransient<IConnectionService, ConnectionService>()
+                    .AddTransient<IAppService, AppService>()
                     .BuildServiceProvider());
         }
     }

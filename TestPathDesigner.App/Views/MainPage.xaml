@@ -15,7 +15,7 @@
             <RowDefinition MaxHeight="20"/>
         </Grid.RowDefinitions>
         <Grid Background="#0E100F" Grid.Row="0">
-
+            <Button Style="{StaticResource ExitButton}" Command="{Binding ExitAppCommand}"></Button>
         </Grid>
         <Grid Background="#0E100F" Grid.Row="1">
             <Grid.ColumnDefinitions>
