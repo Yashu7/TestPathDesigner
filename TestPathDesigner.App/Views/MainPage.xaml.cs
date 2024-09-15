@@ -21,7 +21,7 @@ namespace TestPathDesigner.App.Views
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : Window
     {
         public MainPage()
         {
