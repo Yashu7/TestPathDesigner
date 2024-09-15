@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition MaxHeight="20"/>
         </Grid.RowDefinitions>
-        <Grid Background="#101720" Grid.Row="0">
+        <Grid Background="#0E100F" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -34,7 +34,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <ComboBox Margin="0,0,0,10" Style="{DynamicResource ComboBoxStyle1}" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding AppModels, Mode=TwoWay}" SelectedItem="{Binding AppModelSelected, Mode=TwoWay}">
+                        <ComboBox Margin="0,0,0,10" Style="{DynamicResource ComboBoxFlatStyle}" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding AppModels, Mode=TwoWay}" SelectedItem="{Binding AppModelSelected, Mode=TwoWay}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -49,8 +49,8 @@
                 </StackPanel>
                 <StackPanel IsEnabled="{Binding IsAppSet}" Orientation="Vertical" Grid.Row="1">
                     <TextBox Text="{Binding ElementName, Mode=TwoWay}"/>
-                    <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding ElementType, Mode=TwoWay}"/>
-                    <ComboBox ItemsSource="{Binding Actions}" SelectedItem="{Binding ActionType, Mode=TwoWay}"/>
+                    <ComboBox MaxWidth="150" Margin="10,10,10,10" Style="{DynamicResource ComboBoxFlatStyle}" ItemsSource="{Binding Types}" SelectedItem="{Binding ElementType, Mode=TwoWay}"/>
+                    <ComboBox MaxWidth="150" Margin="10,0,10,10" Style="{DynamicResource ComboBoxFlatStyle}" ItemsSource="{Binding Actions}" SelectedItem="{Binding ActionType, Mode=TwoWay}"/>
                     <Button Margin="50,10,50,0" Command="{Binding AddCommand}" Content="Add Test Path"/>
                 </StackPanel>
                 <StackPanel IsEnabled="{Binding IsAppSet}" Grid.Row="2" Orientation="Vertical">
@@ -83,7 +83,7 @@
                 </StackPanel>
                 <Button IsEnabled="{Binding IsAppSet}" Margin="50,0,50,10" Grid.Row="3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Content="Start Testing" Command="{Binding StartTestingCommand}"/>
             </Grid>
-            <ListView Background="#101720" Foreground="White" ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
+            <ListView Background="#0E100F" Foreground="White" ItemsSource="{Binding Logs, Mode=TwoWay}" Grid.Column="1">
 
             </ListView>
         </Grid>
